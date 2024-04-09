@@ -36,6 +36,13 @@
 ;;; Remove toolbar and menubar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+;; set the fond size
+(defun set-font-size (size)
+    "Set the font size for all buffers"
+    (interactive)
+    (set-face-attribute 'default nil :height (* size 10)))
+;; Set default font size
+(set-font-size 14)
 
 ;; Keybinds
 
