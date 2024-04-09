@@ -2,3 +2,5 @@
 !init.el
 !lisp
 !.gitignore
+!emacs_context_menu.reg
+

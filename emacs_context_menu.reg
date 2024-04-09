@@ -1,0 +1,41 @@
+Windows Registry Editor Version 5.00
+;; Be sure to set the correct path to Emacs on your system!
+[HKEY_CURRENT_USER\Software\Classes\*\shell]
+
+
+;; Open file in existing frame
+[HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopencurrentframe]
+@="&Emacs: Edit in existing window"
+"icon"="emacsclientw.exe"
+[HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopencurrentframe\command]
+@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
+
+
+;; Open file in new frame
+[HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe]
+@="&Emacs: Edit in new window"
+"icon"="emacsclientw.exe"
+[HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe\command]
+@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%1\""
+
+;; In my understanding the commands below only work when
+;; under HKEY_CLASSES_ROOT (and not HKEY_CURRENT_USER)
+;; So they can only be applied by admin
+
+;; Open folder by clicking directly on a folder
+[HKEY_CLASSES_ROOT\Directory\shell\emacs]
+@="Open Emacs Here"
+"icon"="emacsclientw.exe"
+
+[HKEY_CLASSES_ROOT\Directory\shell\emacs\command]
+@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n -c --alternate-editor \"runemacs.exe\" \"%1\""
+
+
+;; Open folder by clicking on background
+[HKEY_CLASSES_ROOT\Directory\Background\shell\emacs]
+@="&Emacs here"
+"icon"="emacsclientw.exe"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\emacs\command]
+@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%v\""
+
