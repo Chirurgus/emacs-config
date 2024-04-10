@@ -14,6 +14,10 @@
 (global-undo-tree-mode)
 
 
+;; Start server 
+(load "server")
+(unless (server-running-p) (server-start))
+
 ;; Dired
 ;;; By default don't show information, toggle with `(`
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
@@ -86,6 +90,9 @@
 ;; Undo history
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
+;; Load custom scrips
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(load "note-id")
 
 
 (custom-set-variables
