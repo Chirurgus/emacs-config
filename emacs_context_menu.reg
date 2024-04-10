@@ -8,15 +8,17 @@ Windows Registry Editor Version 5.00
 @="&Emacs: Edit in existing window"
 "icon"="emacsclientw.exe"
 [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopencurrentframe\command]
-@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
-
+;@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
+@="\"C:\\Users\\oleksandr.sorochynsk\\Documents\\Programs\\emacs\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
 
 ;; Open file in new frame
 [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe]
 @="&Emacs: Edit in new window"
 "icon"="emacsclientw.exe"
 [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe\command]
-@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%1\""
+;@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%1\""
+@="\"C:\\Users\\oleksandr.sorochynsk\\Documents\\Programs\\emacs\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
+
 
 ;; In my understanding the commands below only work when
 ;; under HKEY_CLASSES_ROOT (and not HKEY_CURRENT_USER)
@@ -28,7 +30,8 @@ Windows Registry Editor Version 5.00
 "icon"="emacsclientw.exe"
 
 [HKEY_CLASSES_ROOT\Directory\shell\emacs\command]
-@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n -c --alternate-editor \"runemacs.exe\" \"%1\""
+;@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n -c --alternate-editor \"runemacs.exe\" \"%1\""
+@="\"C:\\Users\\oleksandr.sorochynsk\\Documents\\Programs\\emacs\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%1\""
 
 
 ;; Open folder by clicking on background
@@ -37,5 +40,6 @@ Windows Registry Editor Version 5.00
 "icon"="emacsclientw.exe"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\emacs\command]
-@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%v\""
+;@="\"C:\\Program Files\\Emacs\\emacs-29.2\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" -c \"%v\""
+@="\"C:\\Users\\oleksandr.sorochynsk\\Documents\\Programs\\emacs\\bin\\emacsclientw.exe\" -n --alternate-editor \"runemacs.exe\" \"%v\""
 
