@@ -29,10 +29,12 @@
 (setq display-fill-column-indicator-column 80)
 ;;; Highlight line
 (global-hl-line-mode)
+;;; Disable
+(setq inhibit-startup-screen t)
 
 ;; Appearance
 ;;; Load color theme
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-light t)
 ;;; Remove toolbar and menubar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -60,6 +62,12 @@
 	("j" "Journal" entry (file+datetree "~/org/journal.org") "* %?\nEntered on %U\n  %i\n  %a")
     )
 )
+;; Don't match < and > signs as parentheses
+(defun org-syntax-table-modify ()
+  "Modify `org-mode-syntax-table' for the current org buffer."
+  (modify-syntax-entry ?< "." org-mode-syntax-table)
+  (modify-syntax-entry ?> "." org-mode-syntax-table))
+(add-hook 'org-mode-hook #'org-syntax-table-modify)
 
 ;; Backups 
 (setq backup-directory-alist `(("." . "~/.emacs.d/saves")))
