@@ -8,6 +8,7 @@
 (require 'evil)
 (evil-mode 1)
 (evil-select-search-module 'evil-search-module 'evil-search)
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
 (require 'undo-tree)
 (evil-set-undo-system 'undo-tree)
@@ -54,11 +55,11 @@
 
 
 ;; Org mode
-;;; 
+;;; Enter follows link (but it doesn't seem to work, `gf` works fine though)
 (setq org-return-follows-link  t)
-;;;
+(setq org-log-done 'time)
+;;; Always use org-modes' indent mode
 (add-hook 'org-mode-hook 'org-indent-mode)
-
 ;; org-capture
 (setq org-capture-templates
     '(
