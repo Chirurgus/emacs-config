@@ -3,12 +3,40 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
+;;; Declare packages
+(setq my-packages
+    '(
+    evil
+    undo-tree
+    magit))
+;;; Iterate on packages and install missing ones
+(dolist (pkg my-packages)
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
 
 ;; Evil
 (require 'evil)
 (evil-mode 1)
 (evil-select-search-module 'evil-search-module 'evil-search)
 (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+
+;;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 (require 'undo-tree)
 (evil-set-undo-system 'undo-tree)
@@ -103,7 +131,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307" default))
- '(package-selected-packages '(undo-tree solarized-theme evil)))
+ '(package-selected-packages '(magit undo-tree solarized-theme evil)))
     
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
