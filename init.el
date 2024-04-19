@@ -52,6 +52,8 @@
 (set-font-size 14)
 
 ;; Keybinds
+(evil-define-key 'normal evil-normal-state-map (kbd "M-o") #'project-find-file)
+
 
 
 ;; Org mode
