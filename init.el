@@ -8,17 +8,22 @@
     '(
     evil
     undo-tree
-    magit))
+    magit
+    evil-collection))
 ;;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
 ;; Evil
+;;; I am told to do this but I don't understand what it does
+(setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+(setq evil-want-keybinding nil)
 (require 'evil)
 (evil-mode 1)
 (evil-select-search-module 'evil-search-module 'evil-search)
-(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+(require 'evil-collection)
+(evil-collection-init)
 
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
@@ -80,8 +85,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (set-font-size 14)
 
 ;; Keybinds
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 (evil-define-key 'normal evil-normal-state-map (kbd "M-o") #'project-find-file)
-
 
 
 ;; Org mode
