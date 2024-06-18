@@ -57,8 +57,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;;; LanguageTool
+;;; via langtool
 ;(setq langtool-language-tool-jar "C:/Users/oleksandr.sorochynsk/Downloads/LanguageTool-6.4/languagetool-commandline.jar")
 ;(require 'langtool)
+;;; Via Ltex
+(use-package lsp-ltex
+  :ensure t
+  :hook (text-mode . (lambda ()
+                       (require 'lsp-ltex)
+                       (lsp)))  ; or lsp-deferred
+  :init
+  (setq lsp-ltex-version "16.0.0"))  ; make sure you have set this, see below
 
 ;; General editor settings
 (set-language-environment "UTF-8")
@@ -90,7 +99,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Keybinds
 (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-(evil-define-key 'normal evil-normal-state-map (kbd "M-o") #'project-find-file)
+(define-key evil-normal-state-map (kbd "M-o") #'project-find-file)
 
 
 ;; Org mode
@@ -143,7 +152,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(custom-safe-themes
    '("4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307" default))
  '(package-selected-packages
-   '(evil-collection magit undo-tree solarized-theme evil)))
+   '(## lsp-ltex evil-collection magit undo-tree solarized-theme evil)))
     
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
