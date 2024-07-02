@@ -1,5 +1,6 @@
 /*
 !init.el
+!custom.el
 !lisp
 !.gitignore
 !emacs_context_menu.reg

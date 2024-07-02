@@ -3,13 +3,18 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
+
 ;;; Declare packages
 (setq my-packages
     '(
     evil
     undo-tree
     magit
-    evil-collection))
+    evil-collection
+    vertico
+    ;company 
+    corfu ; similar to company but better integration with vertico
+    ))
 ;;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
   (unless (package-installed-p pkg)
@@ -56,6 +61,80 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; By default don't show information, toggle with `(`
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
+;; Vertico
+(use-package vertico
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;;(setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
+  )
+(setq completion-styles '(flex basic))
+
+(use-package corfu
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-delay 1)
+  (corfu-auto-prefix 3)
+  (completion-styles '(flex basic))
+  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+
+  ;; Enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  :init
+  (global-corfu-mode))
+
+;; Emacs 28 and newer: Hide commands in M-x which do not work in the current
+;; mode.  Vertico commands are hidden in normal buffers. This setting is
+;; useful beyond Vertico.
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+
+;; Don't use consult package 
+; (use-package consult)
+; (setq completion-in-region-function
+      ; (lambda (&rest args)
+        ; (apply (if vertico-mode
+                   ; #'consult-completion-in-region
+                 ; #'completion--in-region)
+               ; args)))
+; (setq completion-in-region-function 'consult-completion-in-region)
+; (setq enable-recursive-minibuffers t)
+
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+
 ;;; LanguageTool
 ;;; via langtool
 ;(setq langtool-language-tool-jar "C:/Users/oleksandr.sorochynsk/Downloads/LanguageTool-6.4/languagetool-commandline.jar")
@@ -67,7 +146,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                        (require 'lsp-ltex)
                        (lsp)))  ; or lsp-deferred
   :init
-  (setq lsp-ltex-version "16.0.0"))  ; make sure you have set this, see below
+  (setq lsp-ltex-version "16.0.0"))  
+(define-key evil-normal-state-map (kbd "C-n") #'lsp-execute-code-action)
 
 ;; General editor settings
 (set-language-environment "UTF-8")
@@ -143,20 +223,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (load "note-id")
 
+;; Load settings generated with `customize` interface
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307" default))
- '(package-selected-packages
-   '(## lsp-ltex evil-collection magit undo-tree solarized-theme evil)))
-    
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
