@@ -12,8 +12,9 @@
     magit
     evil-collection
     vertico
-    ;company 
     corfu ; similar to company but better integration with vertico
+    marginalia
+    lsp-ltex
     ))
 ;;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
