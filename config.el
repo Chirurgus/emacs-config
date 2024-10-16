@@ -33,7 +33,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
-(setq doom-font (font-spec :size 14))
+(setq doom-font (font-spec :size 16))
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -80,6 +80,14 @@
 ;;
 ;;; Don't wrap lines
 (set-default 'truncate-lines t)
+(setq truncate-lines t)
+(setq org-startup-truncated t)
+(setq truncate-partial-width-windows 1000)
+;(setq word-wrap nil)
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
+
+(global-display-fill-column-indicator-mode 1)
+(setq display-fill-column-indicator-column 80)
 
 (add-to-list 'load-path "~/.config/doom/lisp")
 (load "note-id")
@@ -97,3 +105,4 @@
   (setq lsp-ltex-ls-path "~/.config/doom/ltex-ls/ltex-ls-16.0.0/bin")
 )
 (define-key evil-normal-state-map (kbd "C-n") #'lsp-execute-code-action)
+
