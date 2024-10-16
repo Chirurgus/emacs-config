@@ -101,8 +101,13 @@
                        (require 'lsp-ltex)
                        (lsp)))  ; or lsp-deferred
   :init
-  (setq lsp-ltex-version "16.0.0")
-  (setq lsp-ltex-ls-path "~/.config/doom/ltex-ls/ltex-ls-16.0.0/bin")
+  (setq lsp-ltex-check-frequency "save"
+        lsp-ltex-language "auto"
+        lsp-ltex-disabled-rules
+        '(:fr ["DEUX_POINTS_ESPACE"]
+          :en []))
+  ; put in folder downlaod and rename lsp-ltex-server-store-path/ltex-ls-16.0.0 to ltex-ls/latest
+  ; By default, lsp-ltex-server-store-path = ~/.config/emacs/.local/etc/lsp/ltex-ls
+  ; I tried setting it to something nicer, but it dint' work
 )
 (define-key evil-normal-state-map (kbd "C-n") #'lsp-execute-code-action)
-
