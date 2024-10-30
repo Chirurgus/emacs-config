@@ -42,6 +42,13 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+;;
+;; Stup agenda view how I like it
+(setq org-agenda-prefix-format
+        '((agenda . " %i%c %b %?-12t% s")
+        (todo . " %i %c %b")
+        (tags . " %i %c %b")
+        (search . " %i %c %b")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
