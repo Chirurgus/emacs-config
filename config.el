@@ -50,6 +50,13 @@
         (tags . " %i %c %b")
         (search . " %i %c %b")))
 
+;; Don't match < and > signs as parentheses
+(defun org-syntax-table-modify ()
+  "Modify `org-mode-syntax-table' for the current org buffer."
+  (modify-syntax-entry ?< "." org-mode-syntax-table)
+  (modify-syntax-entry ?> "." org-mode-syntax-table))
+(add-hook 'org-mode-hook #'org-syntax-table-modify)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
