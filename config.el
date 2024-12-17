@@ -100,6 +100,9 @@
 ;(setq word-wrap nil)
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines t)))
 
+; Insert org links as relative
+(setq org-link-file-path-type 'relative)
+
 (global-display-fill-column-indicator-mode 1)
 (setq display-fill-column-indicator-column 80)
 
