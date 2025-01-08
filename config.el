@@ -124,8 +124,8 @@
         lsp-ltex-disabled-rules
         '(:fr ["DEUX_POINTS_ESPACE"]
           :en []))
-  ; put in folder downlaod and rename lsp-ltex-server-store-path/ltex-ls-16.0.0 to ltex-ls/latest
-  ; By default, lsp-ltex-server-store-path = ~/.config/emacs/.local/etc/lsp/ltex-ls
-  ; I tried setting it to something nicer, but it dint' work
+  ; By default lsp-ltex looks for the server in ~/.config/emacs/.local/etc/lsp/ltex-ls
+  ; i.e., such that the `bin` folder is located in ~/.config/emacs/.local/etc/lsp/ltex-ls/latest/bin
+  ; I tried setting it to something nicer, but it dint' work.
 )
 (define-key evil-normal-state-map (kbd "C-n") #'lsp-execute-code-action)
